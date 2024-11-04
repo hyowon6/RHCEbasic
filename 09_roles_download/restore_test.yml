@@ -1,0 +1,9 @@
+---
+- name: Restore_test.yml
+  hosts: all
+  roles:
+    - rollback2
+  vars:
+    web_files:
+      - /etc/httpd/conf.d/vhost.conf
+      - /var/www/vhosts

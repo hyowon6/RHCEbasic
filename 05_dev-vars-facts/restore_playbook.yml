@@ -1,0 +1,33 @@
+---
+- name: Restore
+  hosts: webserver
+  tasks:
+    - name: 1) 방화벽 포트 제거
+      ansible.posix.firewalld:
+        service: "{{ ansible_local.custom.general.fwsvc }}"
+        permanent: true
+        immediate: true
+        state: disabled
+ 
+    - name: 2) 서비스 종료
+      ansible.builtin.service:
+        name: "{{ ansible_local.custom.general.service }}"
+        enabled: false
+        state: stopped
+
+    - name: 2) 서비스 종료
+      ansible.builtin.service:
+        name: firewalld
+        enabled: false
+        state: stopped
+
+    - name: 3) 패키지 삭제
+      ansible.builtin.yum:
+        name: "{{ ansible_local.custom.general.package }}"
+        state: absent
+
+    - name: 4) 팩트 삭제
+      ansible.builtin.file:
+        path: /etc/ansible/facts.d
+        state: directory
+        recurse: true

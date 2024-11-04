@@ -1,0 +1,12 @@
+---
+# vars file for roles/rollbacksvc
+# default나 vars 둘 중에 하나만 사용
+fw_rules:
+  - http
+  - https
+svcs:
+  - httpd
+  - firewalld
+pkgs:
+  - httpd
+  - mod_ssl

@@ -1,0 +1,8 @@
+---
+- name: 0) 파일 삭제
+  hosts: all
+  tasks:
+    - name: 1) 파일 삭제 - users.txt
+      ansible.builtin.file:
+        path: /home/devops/users.txt
+        state: absent
